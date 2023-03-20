@@ -1,22 +1,41 @@
-const Header = () => {
-    return (
-      <div className="header">
-        <img
-          className="logo"
-          src="https://png.pngtree.com/png-clipart/20220628/original/pngtree-food-logo-png-image_8239850.png"
-          alt="Logo"
-        />
-  
-        <div className="nav-items">
-          <ul>
-            <li>Home</li>
-            <li>contact</li>
-            <li>About</li>
-            <li>Cart</li>
-          </ul>
-        </div>
-      </div>
-    );
-  };
+import { useState } from "react";
+import Logo from "../assets/img/FoodLogo.png";
+import { Link } from "react-router-dom";
 
-  export default Header;
+const Title = () => (
+  <a href="/">
+    <img className="logo" alt="logo" src={Logo} />
+  </a>
+);
+
+const Header = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  return (
+    <div className="header">
+      <Title />
+      <div className="nav-items">
+        <ul>
+          <li>
+            <Link to="/">Home</Link>
+          </li>
+
+          <Link to="/about">
+            <li>About</li>
+          </Link>
+          <Link to="/contact">
+            <li>Contact</li>
+          </Link>
+          <li>Cart</li>
+        </ul>
+      </div>
+      {isLoggedIn ? (
+        <button onClick={() => setIsLoggedIn(false)}>Logout</button>
+      ) : (
+        <button onClick={() => setIsLoggedIn(true)}>Login</button>
+      )}
+    </div>
+  );
+};
+
+export default Header;
